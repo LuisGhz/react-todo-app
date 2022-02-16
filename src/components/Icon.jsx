@@ -1,0 +1,21 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
+const buttonStyle = css`
+  background-color: rebeccapurple;
+  border-radius: 1.5rem;
+  border: none;
+  color: white;
+  height: 3rem;
+  outline: none;
+  width: 3rem;
+  font-size: 2rem;
+  &:hover {
+    background-color: blue;
+    cursor: pointer;
+  }
+`;
+
+export const Icon = ({ click, style }) => {
+  return (<button css={buttonStyle} style={style} onClick={click} >+</button>)
+}
