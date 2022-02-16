@@ -1,0 +1,9 @@
+.todo-header {
+  font-size: 2rem;
+}
+
+.todo-header__counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
