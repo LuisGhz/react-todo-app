@@ -16,6 +16,6 @@ const buttonStyle = css`
   }
 `;
 
-export const Icon = ({ click, style }) => {
+export const AddTodoButton = ({ click, style }) => {
   return (<button css={buttonStyle} style={style} onClick={click} >+</button>)
 }

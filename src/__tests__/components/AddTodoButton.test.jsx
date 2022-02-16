@@ -1,13 +1,13 @@
 import Enzyme, { mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { Icon } from "components/Icon";
+import { AddTodoButton } from "components/AddTodoButton";
 
 Enzyme.configure({ adapter: new Adapter() });
-describe('Icon component', () => {
-  let wrapper = mount(<Icon />);
+describe('AddTodoButton component', () => {
+  let wrapper = mount(<AddTodoButton />);
 
   beforeEach(() => {
-    wrapper = mount(<Icon />);
+    wrapper = mount(<AddTodoButton />);
   })
 
   test('span must has + text', () => {
