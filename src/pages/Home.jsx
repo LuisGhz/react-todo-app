@@ -1,5 +1,6 @@
 import { AddTodoButton } from "components/AddTodoButton";
 import { TodoHeader } from "components/TodoHeader";
+import { TodoList } from "components/TodoList";
 
 export const Home = () => {
   return (
@@ -7,7 +8,9 @@ export const Home = () => {
       <section className="todo__header">
         <TodoHeader />
       </section>
-      <section className="todo__todo-list"></section>
+      <section className="todo__todo-list">
+        <TodoList />
+      </section>
       <AddTodoButton />
     </section>
   );
