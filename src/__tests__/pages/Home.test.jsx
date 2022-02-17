@@ -11,11 +11,11 @@ describe('Home component', () => {
   });
 
   test('Should has a header section', () => {
-    expect(wrapper.exists('.todo__header')).toBeTruthy();
+    expect(wrapper.exists('.todo-app__header')).toBeTruthy();
   })
 
   test('Should has todo list', () => {
-    expect(wrapper.exists('.todo__todo-list')).toBeTruthy();
+    expect(wrapper.exists('.todo-app__todo-list')).toBeTruthy();
   })
 
   test('Should has add todo button', () => {
