@@ -1,8 +1,12 @@
 import React from "react";
 import { format } from "date-fns";
-import './TodoHeader.css'
+import { TodoContext } from "../TodoContext";
+import { useContext } from "react";
+import './TodoHeader.css';
 
-export const TodoHeader = ({ totalTasks = 0, completedTasks = 0 }) => {
+
+export const TodoHeader = () => {
+  const { totalTasks, totalTasksCompleted } = useContext(TodoContext);
   return (
     <React.Fragment>
       <h1 className='todo-header todo-app__todo-header'>
@@ -13,7 +17,7 @@ export const TodoHeader = ({ totalTasks = 0, completedTasks = 0 }) => {
           <span className='text-bold' >{totalTasks}</span> {totalTasks === 1 ? 'task' : 'tasks'} created
         </section>
         <section className='todo-header__completed-tasks'>
-          <span className='text-bold' >{completedTasks}</span> {completedTasks === 1 ? 'task' : 'tasks'} completed
+          <span className='text-bold' >{totalTasksCompleted}</span> {totalTasksCompleted === 1 ? 'task' : 'tasks'} completed
         </section>
       </section>
     </React.Fragment>
