@@ -41,8 +41,10 @@ describe('TodoHeader component', () => {
   });
 
   test('Print 10 tasks created', () => {
+    const arr = new Array(10);
+    arr.fill(1)
     const view = mount(
-      <TodoContext.Provider value={{totalTasks: 10}} >
+      <TodoContext.Provider value={{tasks: arr}} >
         <TodoHeader />
       </TodoContext.Provider>
     )
@@ -52,7 +54,7 @@ describe('TodoHeader component', () => {
 
   test('Print 10 tasks completed', () => {
     const view = mount(
-      <TodoContext.Provider value={{totalTasksCompleted: 10}} >
+      <TodoContext.Provider value={{totalTasksCompleted: 10, tasks: []}} >
         <TodoHeader />
       </TodoContext.Provider>
     )
