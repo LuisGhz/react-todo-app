@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 export const TodoContext = React.createContext()
 
 export const TodoProvider = ({ children }) => {
-  const [tasks, setTasks] = useState(0);
+  const [tasks, setTasks] = useState([]);
   const [totalTasksCompleted, setTotalTasksCompleted] = useState(0);
 
   useEffect(() => {
