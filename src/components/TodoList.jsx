@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from 'TodoContext';
 
-export const TodoList = ({ elements = [] }) => {
+export const TodoList = () => {
+  const { tasks } = useContext(TodoContext);
   return (
     <React.Fragment>
-      {elements.length === 0 && <p>You still have not a todo registered.</p> }
-      {elements.length > 0 && 
+      {tasks.length === 0 && <p>You still have not a todo registered.</p> }
+      {tasks.length > 0 && 
         <ul>
-          { elements.map(el => (
+          { tasks.map(el => (
             <li key={el.id}>{el.description}</li>
           )) }
         </ul> 
