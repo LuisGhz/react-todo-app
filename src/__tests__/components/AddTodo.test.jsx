@@ -7,7 +7,7 @@ import { AddTodo } from 'components/AddTodo';
 Enzyme.configure({ adapter: new Adapter() });
 describe('AddTodo component', () => {
 
-  beforeEach(cleanup);
+  afterEach(cleanup);
 
   test('Cancel todo', () => {
     const setIsAddTodoVisible = jest.fn();
