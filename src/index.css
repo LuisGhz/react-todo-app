@@ -17,3 +17,7 @@ code {
 .text-bold {
   font-weight: bold;
 }
+
+.c-pointer:hover {
+  cursor: pointer;
+}
