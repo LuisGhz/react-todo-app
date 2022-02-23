@@ -19,7 +19,7 @@ describe('AddTodo component', () => {
         <AddTodo  setIsAddTodoVisible={setIsAddTodoVisible} />
       </TodoContext.Provider>
     );
-    wrapper.find('.add-todo__cancel').simulate('click');
+    wrapper.find('.add-todo__cancel').at(1).simulate('click');
     expect(setIsAddTodoVisible).toBeCalled()
   });
   
@@ -29,7 +29,7 @@ describe('AddTodo component', () => {
         <AddTodo />
       </TodoContext.Provider>
     );
-    expect(wrapper.find('.add-todo__add').props().disabled).toBe(true);
+    expect(wrapper.find('.add-todo__add').at(1).props().disabled).toBe(true);
   });
 
   test('Add todo button must be enabled if description input has value', () => {
@@ -38,8 +38,8 @@ describe('AddTodo component', () => {
         <AddTodo />
       </TodoContext.Provider>
     );
-    wrapper.find('.todo-description').simulate('change', { target: { value: 'description' } })
-    expect(wrapper.find('.add-todo__add').props().disabled).toBeFalsy()
+    wrapper.find('.todo-description').at(1).simulate('change', { target: { value: 'description' } })
+    expect(wrapper.find('.add-todo__add').at(1).props().disabled).toBeFalsy()
   });
 
   test('Add todo button must disabled if user sets string with only blank spaces on description', () => {
@@ -48,8 +48,8 @@ describe('AddTodo component', () => {
         <AddTodo />
       </TodoContext.Provider>
     );
-    wrapper.find('.todo-description').simulate('change', { target: { value: '     ' } })
-    expect(wrapper.find('.add-todo__add').props().disabled).toBe(true)
+    wrapper.find('.todo-description').at(1).simulate('change', { target: { value: '     ' } })
+    expect(wrapper.find('.add-todo__add').at(1).props().disabled).toBe(true)
   });
   
   
@@ -61,8 +61,8 @@ describe('AddTodo component', () => {
         <AddTodo setIsAddTodoVisible={setIsAddTodoVisible} />
       </TodoContext.Provider>
     );
-    wrapper.find('.todo-description').simulate('change', { target: { value: 'Description' } });
-    wrapper.find('.add-todo__add').simulate('click');
+    wrapper.find('.todo-description').at(1).simulate('change', { target: { value: 'Description' } });
+    wrapper.find('.add-todo__add').at(1).simulate('click');
     expect(postSpy).toBeCalled();
     expect(setIsAddTodoVisible).toBeCalled();
   });
