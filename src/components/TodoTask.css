@@ -1,0 +1,44 @@
+.todo-task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: .8rem;
+}
+
+.todo-task__checkmark, .todo-task__removemark  {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.todo-task__checkmark--completed {
+  color: green;
+}
+
+.todo-task__checkmark--uncompleted {
+  color: gray;
+}
+
+.todo-task__data-contianer {
+  width: 75%;
+}
+
+.todo-task__description {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: .2rem;
+}
+
+.todo-task__created-at {
+  color: gray;
+  font-size: .8rem;
+}
+
+.todo-task__removemark {
+  color: red;
+  font-weight: bold;
+}
+
+.todo-task__checkmark:hover, .todo-task__removemark:hover {
+  cursor: pointer;
+}
