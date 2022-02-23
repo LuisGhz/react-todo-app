@@ -1,15 +1,20 @@
+import React, { useState, useContext } from "react";
+import { TodoContext } from "TodoContext"
+import axios from 'axios';
 import { AddTodoButton } from "components/AddTodoButton";
 import { TodoHeader } from "components/TodoHeader";
 import { AddTodo } from "components/AddTodo";
-import { TodoProvider } from "TodoContext";
 import { TodoList } from "components/TodoList";
 import "./Home.css";
 
 export const Home = () => {
+  const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
+  const { tasks, setTasks } = React.useContext(TodoContext);
+
   return (
-    <TodoProvider>
-      <div className="todo-app__add-todo-container">
-        <AddTodo />
+    <>
+      <div className="todo-app__add-todo-container" style={{display: isAddTodoVisible ? 'flex' : 'none'}}>
+        <AddTodo setIsAddTodoVisible={setIsAddTodoVisible} />
       </div>
       <section className="todo-app">
         <section className="todo-app__header">
@@ -18,8 +23,8 @@ export const Home = () => {
         <section className="todo-app__todo-list">
           <TodoList />
         </section>
-        <AddTodoButton />
+        <AddTodoButton click={() => setIsAddTodoVisible(true)} />
       </section>
-    </TodoProvider>
+    </>
   );
 };
