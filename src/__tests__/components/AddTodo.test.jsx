@@ -66,6 +66,24 @@ describe('AddTodo component', () => {
     expect(postSpy).toBeCalled();
     expect(setIsAddTodoVisible).toBeCalled();
   });
+  
+  test("Create todo with enter key and only if description is valid", () => {
+    const postSpy = jest.spyOn(axios, 'post');
+    const setIsAddTodoVisible = jest.fn();
+    const wrapper = mount(
+      <TodoContext.Provider value={{ setTasks: () => {} }} >
+        <AddTodo setIsAddTodoVisible={setIsAddTodoVisible} />
+      </TodoContext.Provider>
+    );
+    
+    wrapper.find('.todo-description').at(1).simulate('change', { target: { value: '      ' } });
+    wrapper.find('.todo-description').at(1).simulate('keypress', { which: 13 });
+    expect(postSpy).toBeCalledTimes(0);
+    wrapper.find('.todo-description').at(1).simulate('change', { target: { value: 'Description' } });
+    wrapper.find('.todo-description').at(1).simulate('keypress', { which: 13 });
+    expect(postSpy).toBeCalled();
+    expect(setIsAddTodoVisible).toBeCalled();
+  })
 
 
 });
