@@ -1,39 +1,67 @@
 import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import axios from "axios";
 import { TodoList } from "components/TodoList";
-import { TodoContext } from "TodoContext";
+import { TodoProvider, TodoContext } from "TodoContext";
 
 Enzyme.configure({ adapter: new Adapter() });
 describe("TodoList component", () => {
-  let wrapper = mount(
-    <TodoContext.Provider value={{ tasks: [] }}>
-      <TodoList />
-    </TodoContext.Provider>
-  );
+  let wrapper = mount(<></>);
 
   beforeEach(() => {
     wrapper = mount(
-      <TodoContext.Provider value={{ tasks: [] }}>
+      <TodoProvider>
         <TodoList />
-      </TodoContext.Provider>
+      </TodoProvider>
     );
   });
 
-  test('Should print You still have not a todo registered.', () => {
-    expect(wrapper.contains('You still have not a todo registered.')).toBeTruthy();
+  test("Should print You still have not a todo registered.", () => {
+    expect(
+      wrapper.contains("You still have not a todo registered.")
+    ).toBeTruthy();
   });
 
-  test('Should print 3 elements', () => {
-    const tasks = [
-      {id: 1, description: 'Todo 1', createdAt: new Date()},
-      {id: 2, description: 'Todo 2', createdAt: new Date()},
-      {id: 3, description: 'Todo 3', createdAt: new Date()},
-    ];
-    const view = mount(
-      <TodoContext.Provider value={{ tasks }}>
+  test("Get tasks with axios", async () => {
+    const data = {
+      data: 'data',
+    };
+
+    axios.get.mockResolvedValueOnce(data);
+    expect(axios.get).toHaveBeenCalled();
+  });
+
+  test("Print 3 elements", () => {
+    const data = [
+      {
+        id: 1,
+        description: "1",
+        createdAt: new Date(),
+        isCompleted: false
+      },
+      {
+        id: 2,
+        description: "2",
+        createdAt: new Date(),
+        isCompleted: false
+      },
+      {
+        id: 3,
+        description: "3",
+        createdAt: new Date(),
+        isCompleted: false
+      }
+    ]
+    const wr = mount(
+      <TodoContext.Provider value={{ tasks: data }}>
         <TodoList />
       </TodoContext.Provider>
-    );
-    expect(view.find('li').length).toEqual(3);
-  })
+    )
+
+    expect(wr.find("li").length).toEqual(3);
+  });
+
+  test.todo("Remove task");
+
+  test.todo("Mark task as completed");
 });
