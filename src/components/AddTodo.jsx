@@ -57,7 +57,7 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
   const addTodo = () => {
     const newTask = {
       description: todoDescription,
-      createdAt: new Date(),
+      createdAt: new Date().getTime(),
       isCompleted: false
     };
     axios.post('http://localhost:3000/todos', newTask);
