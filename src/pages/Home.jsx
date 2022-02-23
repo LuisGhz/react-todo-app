@@ -1,6 +1,4 @@
-import React, { useState, useContext } from "react";
-import { TodoContext } from "TodoContext"
-import axios from 'axios';
+import React, { useState } from "react";
 import { AddTodoButton } from "components/AddTodoButton";
 import { TodoHeader } from "components/TodoHeader";
 import { AddTodo } from "components/AddTodo";
@@ -9,7 +7,6 @@ import "./Home.css";
 
 export const Home = () => {
   const [isAddTodoVisible, setIsAddTodoVisible] = useState(false);
-  const { tasks, setTasks } = React.useContext(TodoContext);
 
   return (
     <>
