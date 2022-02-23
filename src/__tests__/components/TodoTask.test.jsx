@@ -36,7 +36,7 @@ describe("<TodoTask />", () => {
     const currentDate = format(new Date(), "dd/MMMM/yyyy", {
       locale: es,
     });
-    expect(wrapper.find(".todo-task__create-at").text()).toContain(currentDate);
+    expect(wrapper.find(".todo-task__created-at").text()).toContain(currentDate);
   });
 
   test("Show gray check if task is not completed", () => {
