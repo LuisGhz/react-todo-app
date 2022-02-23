@@ -63,13 +63,14 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
     axios.post('http://localhost:3000/todos', newTask);
     const newTasks = [...tasks, newTask];
     setTasks(newTasks);
+    setTodoDescription("");
     setIsAddTodoVisible(false);
   }
 
   return (
     <div className="todo-container" css={containerStyle}>
       <h1>Add TODO</h1>
-      <input type="text" className="todo-description" css={inputStyle} onChange={e => setTodoDescription(e.target.value)} />
+      <input type="text" className="todo-description" css={inputStyle} value={todoDescription} onChange={e => setTodoDescription(e.target.value)} />
       <div className="todo-buttons-container" css={buttonContainersStyle}>
       <button onClick={onCancel} className="add-todo__cancel c-pointer text-bold" css={[cancelButtonStyle, baseButtonsStyle]} >Cancel</button>
       <button className="add-todo__add c-pointer text-bold" css={[addButtonStyle, baseButtonsStyle]} disabled={todoDescription.trim() === '' ? true : false} onClick={addTodo} >Add</button>
