@@ -4,3 +4,15 @@
   min-width: 20rem;
   width: 50%;
 }
+
+.todo-app__add-todo-container {
+  align-items: center;
+  background-color: rgba(33, 33, 33, .6);
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
