@@ -17,5 +17,5 @@ const buttonStyle = css`
 `;
 
 export const AddTodoButton = ({ click, style }) => {
-  return (<button className="todo-button" css={buttonStyle} style={style} onClick={click} >+</button>)
+  return (<button className="open-modal-todo-button" css={buttonStyle} style={style} onClick={click} >+</button>)
 }

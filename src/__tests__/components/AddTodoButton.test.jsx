@@ -10,7 +10,7 @@ describe('AddTodoButton component', () => {
     wrapper = mount(<AddTodoButton />);
   })
 
-  test('span must has + text', () => {
+  test('button must has + character', () => {
     expect(wrapper.contains('+')).toBe(true)
   });
 
