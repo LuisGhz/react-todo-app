@@ -1,13 +1,14 @@
+import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import axios from "axios";
 import { TodoList } from "components/TodoList";
-import { TodoProvider, TodoContext } from "TodoContext";
+import { TodoProvider } from "TodoContext";
 
 Enzyme.configure({ adapter: new Adapter() });
 describe("TodoList component", () => {
   let wrapper = mount(<></>);
-  const fakeData = [
+  const mockData = [
     {
       id: 1,
       description: "1",
@@ -27,8 +28,23 @@ describe("TodoList component", () => {
       isCompleted: false,
     },
   ];
+  let newData = [];
+  let setTasks = (tasks) => {
+    newData = [...tasks];
+  };
+  jest.mock("React", () => ({
+    ...jest.requireActual("React"),
+    useContext: jest.fn(),
+  }));
+  let contextSpy = jest.spyOn(React, "useContext");
 
   beforeEach(() => {
+    contextSpy.mockImplementation(() => ({
+      tasks: mockData,
+      setTasks,
+      client: axios,
+    }));
+
     wrapper = mount(
       <TodoProvider>
         <TodoList />
@@ -36,64 +52,48 @@ describe("TodoList component", () => {
     );
   });
 
+  beforeEach(() => {
+    axios.create.mockReturnThis();
+  });
+
+  afterEach(() => {
+    newData = [];
+  });
+
   test("Should print You still have not a todo registered.", () => {
+    contextSpy.mockImplementation(() => ({
+      tasks: [],
+      setTasks,
+      client: axios,
+    }));
+
+    wrapper = mount(
+      <TodoProvider>
+        <TodoList />
+      </TodoProvider>
+    );
+
     expect(
       wrapper.contains("You still have not a todo registered.")
     ).toBeTruthy();
   });
 
   test("Get tasks with axios", async () => {
-    const data = {
-      data: "data",
-    };
-
-    axios.get.mockResolvedValueOnce(data);
     expect(axios.get).toHaveBeenCalled();
   });
 
   test("Print 3 elements", () => {
-    const data = [...fakeData];
-    const wr = mount(
-      <TodoContext.Provider value={{ tasks: data }}>
-        <TodoList />
-      </TodoContext.Provider>
-    );
-
-    expect(wr.find("li").length).toEqual(3);
+    expect(wrapper.find("li").length).toEqual(3);
   });
 
   test("Mark task as completed", () => {
-    const data = [...fakeData];
-    let newData  = [];
-
-    const setTasks = (tasks) => {
-      newData = [...tasks]
-    };
-    const wr = mount(
-      <TodoContext.Provider value={{ tasks: data, setTasks }}>
-        <TodoList />
-      </TodoContext.Provider>
-    );
-
-    wr.find(".todo-task__checkmark").at(0).simulate("click");
-    expect(newData.filter(t => t.isCompleted === true).length).toEqual(1);
+    wrapper.find(".todo-task__checkmark").at(0).simulate("click");
+    expect(newData.filter((t) => t.isCompleted === true).length).toEqual(1);
     expect(axios.put).toBeCalled();
   });
 
   test("Remove task", () => {
-    const data = [...fakeData];
-    let newData = [];
-    const setTasks = (tasks) => {
-      newData = [...tasks];
-    }
-
-    const wr = mount(
-      <TodoContext.Provider value={{ tasks: data, setTasks }}>
-        <TodoList />
-      </TodoContext.Provider>
-    );
-
-    wr.find(".todo-task__removemark").at(0).simulate("click");
+    wrapper.find(".todo-task__removemark").at(0).simulate("click");
     expect(newData.length).toEqual(2);
     expect(axios.delete).toBeCalled();
   });
