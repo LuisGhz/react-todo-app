@@ -1,2 +1,2 @@
-const mockAxios = jest.genMockFromModule('axios')
+const mockAxios = jest.genMockFromModule('axios');
 export default mockAxios
