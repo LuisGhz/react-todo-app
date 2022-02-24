@@ -20,7 +20,9 @@ export const Home = () => {
         <section className="todo-app__todo-list">
           <TodoList />
         </section>
-        <AddTodoButton click={() => setIsAddTodoVisible(true)} />
+        <section className="todo-app__add-todo-button-container">
+          <AddTodoButton click={() => setIsAddTodoVisible(true)} />
+        </section>
       </section>
     </>
   );

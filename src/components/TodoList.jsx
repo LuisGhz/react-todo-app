@@ -20,7 +20,7 @@ export const TodoList = () => {
     const temp = JSON.parse(stringified);
     temp[index].isCompleted = true;
     setTasks(temp);
-    axios.put(`http://localhost:3000/todos/${temp[index].id}`, temp[index]);
+    axios.put(`http://localhost:3000/todos/${id}`, temp[index]);
   }
 
   const removeTask = id => {
@@ -29,7 +29,7 @@ export const TodoList = () => {
     const temp = JSON.parse(stringified);
     temp.splice(index, 1);
     setTasks(temp);
-    axios.delete("http://localhost:3000/todos/" + index);
+    axios.delete(`http://localhost:3000/todos/${id}`);
   }
 
   return (

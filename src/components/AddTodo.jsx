@@ -14,12 +14,23 @@ const containerStyle = css`
   justify-content: space-around;
   margin: 0 auto;
   min-height: 15rem;
-  min-width: 20rem;
-  width: 40vw;
+  min-width: 19rem;
+`;
+
+const titleStyle = css`
+  color: var(--primary);
 `;
 
 const inputStyle = css`
+  border-radius: .4rem;
+  border: 1px solid var(--secondary);
+  color: var(--primary);
+  padding: .4rem;
   width: 10rem;
+
+  &:focus-within {
+    outline: none;
+  }
 `;
 
 const buttonContainersStyle = css`
@@ -37,11 +48,11 @@ const baseButtonsStyle = css`
 `;
 
 const cancelButtonStyle = css`
-  background-color: gray;
+  background-color: var(--primary);
 `;
 
 const addButtonStyle = css`
-  background-color: #00ff22;
+  background-color: var(--blue);
   color: white;
   width: 5rem;
 `;
@@ -51,6 +62,7 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
   const { setTasks, tasks = [] } = useContext(TodoContext);
 
   const onCancel = () => {
+    setTodoDescription("");
     setIsAddTodoVisible(false);
   };
 
@@ -73,7 +85,7 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
 
   return (
     <div className="todo-container" css={containerStyle}>
-      <h1>Add TODO</h1>
+      <h1 className="add-todo__title" css={titleStyle}>Add TODO</h1>
       <input
         type="text"
         className="todo-description"

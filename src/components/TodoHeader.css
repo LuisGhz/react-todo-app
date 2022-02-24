@@ -2,6 +2,15 @@
   font-size: 2rem;
 }
 
+.todo-app__todo-header {
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.todo-header__created-tasks, .todo-header__completed-tasks {
+  color: var(--primary);
+}
+
 .todo-header__counter {
   display: flex;
   flex-direction: row;

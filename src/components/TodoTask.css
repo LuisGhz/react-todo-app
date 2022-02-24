@@ -13,6 +13,7 @@
 
 .todo-task__checkmark--completed {
   color: green;
+  font-weight: bold;
 }
 
 .todo-task__checkmark--uncompleted {
@@ -24,6 +25,7 @@
 }
 
 .todo-task__description {
+  color: var(--primary);
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: .2rem;
