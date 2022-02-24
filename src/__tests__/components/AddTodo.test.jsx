@@ -6,7 +6,6 @@ import { AddTodo } from 'components/AddTodo';
 import axios from 'axios';
 
 jest.mock('axios')
-
 Enzyme.configure({ adapter: new Adapter() });
 describe('AddTodo component', () => {
 
