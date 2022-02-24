@@ -13,7 +13,7 @@ const containerStyle = css`
   height: 30vh;
   justify-content: space-around;
   margin: 0 auto;
-  min-height: 10rem;
+  min-height: 15rem;
   min-width: 20rem;
   width: 40vw;
 `;
