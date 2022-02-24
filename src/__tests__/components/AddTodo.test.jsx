@@ -63,6 +63,7 @@ describe('AddTodo component', () => {
     );
     wrapper.find('.todo-description').at(1).simulate('change', { target: { value: 'Description' } });
     wrapper.find('.add-todo__add').at(1).simulate('click');
+    expect(wrapper.find('.todo-description').at(1).props().value).toEqual("");
     expect(postSpy).toBeCalled();
     expect(setIsAddTodoVisible).toBeCalled();
   });
@@ -83,7 +84,7 @@ describe('AddTodo component', () => {
     wrapper.find('.todo-description').at(1).simulate('keypress', { which: 13 });
     expect(postSpy).toBeCalled();
     expect(setIsAddTodoVisible).toBeCalled();
-  })
+  });
 
 
 });
