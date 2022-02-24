@@ -1,10 +1,16 @@
 import { useContext, useEffect } from "react";
 import Enzyme, { mount } from "enzyme";
+import axios from 'axios';
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { TodoContext, TodoProvider } from "TodoContext";
 
 Enzyme.configure({ adapter: new Adapter() });
 describe("TodoContext", () => {
+
+  beforeEach(() => {
+    axios.create.mockReturnThis();
+  });
+  
   test("Get tasks and set new tasks", () => {
     const TestComponent = () => {
       const { tasks, setTasks } = useContext(TodoContext);
@@ -87,4 +93,25 @@ describe("TodoContext", () => {
     wrapper.find("button").simulate("click");
     expect(wrapper.find("p").text()).toEqual("1");
   });
+
+  test("Call axios client", () => {
+    const TestComponent = () => {
+      const { client } = useContext(TodoContext);
+
+      useEffect(() => {
+        client.get("");
+      }, []);
+
+      return <></>
+    }
+
+    const wrapper = mount(
+      <TodoProvider>
+        <TestComponent />
+      </TodoProvider>
+    );
+
+    expect(axios.get).toBeCalled();
+  });
+
 });
