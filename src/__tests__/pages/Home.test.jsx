@@ -1,8 +1,8 @@
-import React, { useState as useStateMock } from "react";
+import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { Home } from "pages/Home";
-import { TodoContext, TodoProvider } from "TodoContext";
+import { TodoProvider } from "TodoContext";
 
 jest.mock("React", () => ({
   ...jest.requireActual("React"),
