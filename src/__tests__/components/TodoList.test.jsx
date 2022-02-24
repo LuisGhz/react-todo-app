@@ -44,16 +44,14 @@ describe("TodoList component", () => {
       setTasks,
       client: axios,
     }));
+  });
 
+  beforeEach(() => {
     wrapper = mount(
       <TodoProvider>
         <TodoList />
       </TodoProvider>
     );
-  });
-
-  beforeEach(() => {
-    axios.create.mockReturnThis();
   });
 
   afterEach(() => {
