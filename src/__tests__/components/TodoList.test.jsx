@@ -7,6 +7,26 @@ import { TodoProvider, TodoContext } from "TodoContext";
 Enzyme.configure({ adapter: new Adapter() });
 describe("TodoList component", () => {
   let wrapper = mount(<></>);
+  const fakeData = [
+    {
+      id: 1,
+      description: "1",
+      createdAt: new Date(),
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      description: "2",
+      createdAt: new Date(),
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      description: "3",
+      createdAt: new Date(),
+      isCompleted: false,
+    },
+  ];
 
   beforeEach(() => {
     wrapper = mount(
@@ -24,7 +44,7 @@ describe("TodoList component", () => {
 
   test("Get tasks with axios", async () => {
     const data = {
-      data: 'data',
+      data: "data",
     };
 
     axios.get.mockResolvedValueOnce(data);
@@ -32,36 +52,49 @@ describe("TodoList component", () => {
   });
 
   test("Print 3 elements", () => {
-    const data = [
-      {
-        id: 1,
-        description: "1",
-        createdAt: new Date(),
-        isCompleted: false
-      },
-      {
-        id: 2,
-        description: "2",
-        createdAt: new Date(),
-        isCompleted: false
-      },
-      {
-        id: 3,
-        description: "3",
-        createdAt: new Date(),
-        isCompleted: false
-      }
-    ]
+    const data = [...fakeData];
     const wr = mount(
       <TodoContext.Provider value={{ tasks: data }}>
         <TodoList />
       </TodoContext.Provider>
-    )
+    );
 
     expect(wr.find("li").length).toEqual(3);
   });
 
-  test.todo("Remove task");
+  test("Mark task as completed", () => {
+    const data = [...fakeData];
+    let newData  = [];
 
-  test.todo("Mark task as completed");
+    const setTasks = (tasks) => {
+      newData = [...tasks]
+    };
+    const wr = mount(
+      <TodoContext.Provider value={{ tasks: data, setTasks }}>
+        <TodoList />
+      </TodoContext.Provider>
+    );
+
+    wr.find(".todo-task__checkmark").at(0).simulate("click");
+    expect(newData.filter(t => t.isCompleted === true).length).toEqual(1);
+    expect(axios.put).toBeCalled();
+  });
+
+  test("Remove task", () => {
+    const data = [...fakeData];
+    let newData = [];
+    const setTasks = (tasks) => {
+      newData = [...tasks];
+    }
+
+    const wr = mount(
+      <TodoContext.Provider value={{ tasks: data, setTasks }}>
+        <TodoList />
+      </TodoContext.Provider>
+    );
+
+    wr.find(".todo-task__removemark").at(0).simulate("click");
+    expect(newData.length).toEqual(2);
+    expect(axios.delete).toBeCalled();
+  });
 });
