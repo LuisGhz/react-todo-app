@@ -7,7 +7,7 @@ export const TodoProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [totalTasksCompleted, setTotalTasksCompleted] = useState(0);
   const client = axios.create({
-    baseURL: "http://localhost:3000/todos"
+    baseURL: "http://localhost:3000/todos/"
   });
 
   useEffect(() => {
