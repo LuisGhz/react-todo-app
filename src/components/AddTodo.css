@@ -1,0 +1,53 @@
+.todo-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 30rem;
+  min-width: 19rem;
+  width: 50vw;
+}
+
+.add-todo__title {
+  color: var(--primary);
+}
+
+.todo-description {
+  border-radius: .4rem;
+  border: 1px solid var(--secondary);
+  color: var(--primary);
+  padding: .4rem;
+  width: 10rem;
+}
+
+.todo-description:focus-within {
+  outline: none;
+}
+
+.todo-buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+}
+
+.add-todo-base-button {
+  border-radius: 0.7rem;
+  color: white;
+  width: 7rem;
+  padding: 0.3rem 0;
+  border: none;
+}
+
+.add-todo__cancel {
+  background-color: var(--primary);
+}
+
+.add-todo__add {
+  background-color: var(--blue);
+  color: white;
+}

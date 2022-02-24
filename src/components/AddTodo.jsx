@@ -1,66 +1,14 @@
-/** @jsxImportSource @emotion/react */
 import { useContext, useState } from "react";
-import axios from "axios";
-import { css } from "@emotion/react";
 import { TodoContext } from "TodoContext";
-
-const containerStyle = css`
-  align-items: center;
-  background-color: white;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  height: 30vh;
-  justify-content: space-around;
-  margin: 0 auto;
-  min-height: 15rem;
-  min-width: 19rem;
-`;
-
-const titleStyle = css`
-  color: var(--primary);
-`;
-
-const inputStyle = css`
-  border-radius: .4rem;
-  border: 1px solid var(--secondary);
-  color: var(--primary);
-  padding: .4rem;
-  width: 10rem;
-
-  &:focus-within {
-    outline: none;
-  }
-`;
-
-const buttonContainersStyle = css`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-`;
-
-const baseButtonsStyle = css`
-  border-radius: 0.7rem;
-  color: white;
-  width: 7rem;
-  padding: 0.3rem 0;
-  border: none;
-`;
-
-const cancelButtonStyle = css`
-  background-color: var(--primary);
-`;
-
-const addButtonStyle = css`
-  background-color: var(--blue);
-  color: white;
-  width: 5rem;
-`;
+import './AddTodo.css';
 
 export const AddTodo = ({ setIsAddTodoVisible }) => {
+  const { setTasks, tasks, client } = useContext(TodoContext);
   const [todoDescription, setTodoDescription] = useState("");
-  const { setTasks, tasks = [] } = useContext(TodoContext);
-
+  console.log(setTasks)
+  console.log(tasks)
+  console.log(client)
+  console.log(setTodoDescription)
   const onCancel = () => {
     setTodoDescription("");
     setIsAddTodoVisible(false);
@@ -76,7 +24,7 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
       createdAt: new Date().getTime(),
       isCompleted: false,
     };
-    axios.post("http://localhost:3000/todos", newTask);
+    client.post("", newTask);
     const newTasks = [...tasks, newTask];
     setTasks(newTasks);
     setTodoDescription("");
@@ -84,27 +32,24 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
   };
 
   return (
-    <div className="todo-container" css={containerStyle}>
-      <h1 className="add-todo__title" css={titleStyle}>Add TODO</h1>
+    <div className="todo-container" >
+      <h1 className="add-todo__title" >Add TODO</h1>
       <input
         type="text"
         className="todo-description"
-        css={inputStyle}
         value={todoDescription}
         onChange={(e) => setTodoDescription(e.target.value)}
         onKeyPress={(e) => createOnEnter(e)}
       />
-      <div className="todo-buttons-container" css={buttonContainersStyle}>
+      <div className="todo-buttons-container">
         <button
           onClick={onCancel}
-          className="add-todo__cancel c-pointer text-bold"
-          css={[cancelButtonStyle, baseButtonsStyle]}
+          className="add-todo__cancel add-todo-base-button c-pointer text-bold"
         >
           Cancel
         </button>
         <button
-          className="add-todo__add c-pointer text-bold"
-          css={[addButtonStyle, baseButtonsStyle]}
+          className="add-todo__add add-todo-base-button c-pointer text-bold"
           disabled={todoDescription.trim() === "" ? true : false}
           onClick={addTodo}
         >
