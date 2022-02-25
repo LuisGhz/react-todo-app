@@ -10,9 +10,9 @@ export const Home = () => {
 
   return (
     <>
-      <div className="todo-app__add-todo-container" style={{display: isAddTodoVisible ? 'flex' : 'none'}}>
+      {isAddTodoVisible && <div className="todo-app__add-todo-container">
         <AddTodo setIsAddTodoVisible={setIsAddTodoVisible} />
-      </div>
+      </div>}
       <section className="todo-app">
         <section className="todo-app__header">
           <TodoHeader />
