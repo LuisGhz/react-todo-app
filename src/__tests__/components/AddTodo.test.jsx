@@ -41,6 +41,10 @@ describe("<AddTodo />", () => {
     expect(setIsAddTodoVisible).toBeCalled();
   });
 
+  test("Input must has auto focus", () => {
+    expect(wrapper.find(".todo-description").props().autoFocus).toBeTruthy();
+  })
+
   test("Add todo button must be disable by default", () => {
     expect(wrapper.find(".add-todo__add").props().disabled).toBe(true);
   });

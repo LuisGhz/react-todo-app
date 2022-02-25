@@ -5,10 +5,6 @@ import './AddTodo.css';
 export const AddTodo = ({ setIsAddTodoVisible }) => {
   const { setTasks, tasks, client } = useContext(TodoContext);
   const [todoDescription, setTodoDescription] = useState("");
-  console.log(setTasks)
-  console.log(tasks)
-  console.log(client)
-  console.log(setTodoDescription)
   const onCancel = () => {
     setTodoDescription("");
     setIsAddTodoVisible(false);
@@ -40,6 +36,7 @@ export const AddTodo = ({ setIsAddTodoVisible }) => {
         value={todoDescription}
         onChange={(e) => setTodoDescription(e.target.value)}
         onKeyPress={(e) => createOnEnter(e)}
+        autoFocus
       />
       <div className="todo-buttons-container">
         <button
