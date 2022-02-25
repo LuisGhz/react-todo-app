@@ -20,8 +20,9 @@
   border-radius: .4rem;
   border: 1px solid var(--secondary);
   color: var(--primary);
+  min-width: 18rem;
   padding: .4rem;
-  width: 10rem;
+  width: 80%;
 }
 
 .todo-description:focus-within {
